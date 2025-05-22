@@ -1,0 +1,21 @@
+@model EquipeOrfolio.Models.Candidat
+
+@{
+    ViewBag.Title = "Supprimer Candidat";
+}
+
+<h2>Supprimer Candidat</h2>
+
+<h3>Es-tu sûr de vouloir supprimer cet enregistrement ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Prenom</dt><dd>@Html.DisplayFor(model => model.Prenom)</dd><dt>Nom</dt><dd>@Html.DisplayFor(model => model.Nom)</dd><dt>Courriel</dt><dd>@Html.DisplayFor(model => model.Courriel)</dd><dt>Telephone</dt><dd>@Html.DisplayFor(model => model.Telephone)</dd><dt>TypePoste</dt><dd>@Html.DisplayFor(model => model.TypePoste)</dd><dt>ProgrammeEtudes</dt><dd>@Html.DisplayFor(model => model.ProgrammeEtudes)</dd><dt>Etablissement</dt><dd>@Html.DisplayFor(model => model.Etablissement)</dd><dt>Disponibilite</dt><dd>@Html.DisplayFor(model => model.Disponibilite)</dd><dt>DateDebut</dt><dd>@Html.DisplayFor(model => model.DateDebut)</dd><dt>Remarques</dt><dd>@Html.DisplayFor(model => model.Remarques)</dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Supprimer" class="btn btn-danger" /> |
+        @Html.ActionLink("Annuler", "Index")
+    }
+</div>

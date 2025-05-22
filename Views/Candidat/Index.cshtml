@@ -1,0 +1,29 @@
+@model IEnumerable<EquipeOrfolio.Models.Candidat>
+
+@{
+    ViewBag.Title = "Liste des candidats";
+}
+
+<h2>Liste des candidats</h2>
+
+<p>
+    @Html.ActionLink("Créer un nouveau", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>Prenom</th><th>Nom</th><th>Courriel</th><th>Telephone</th><th>TypePoste</th><th>ProgrammeEtudes</th><th>Etablissement</th><th>Disponibilite</th><th>DateDebut</th><th>Remarques</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Prenom)</td><td>@Html.DisplayFor(modelItem => item.Nom)</td><td>@Html.DisplayFor(modelItem => item.Courriel)</td><td>@Html.DisplayFor(modelItem => item.Telephone)</td><td>@Html.DisplayFor(modelItem => item.TypePoste)</td><td>@Html.DisplayFor(modelItem => item.ProgrammeEtudes)</td><td>@Html.DisplayFor(modelItem => item.Etablissement)</td><td>@Html.DisplayFor(modelItem => item.Disponibilite)</td><td>@Html.DisplayFor(modelItem => item.DateDebut)</td><td>@Html.DisplayFor(modelItem => item.Remarques)</td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.CandidatID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.CandidatID }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.CandidatID })
+        </td>
+    </tr>
+}
+</table>

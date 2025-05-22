@@ -1,0 +1,29 @@
+@model IEnumerable<EquipeOrfolio.Models.Stage>
+
+@{
+    ViewBag.Title = "Liste des stages";
+}
+
+<h2>Liste des stages</h2>
+
+<p>
+    @Html.ActionLink("Créer un nouveau", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>ProgrammeScolaire</th><th>EncadrementRequis</th><th>Duree</th><th>Objectifs</th><th>CandidatID</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.ProgrammeScolaire)</td><td>@Html.DisplayFor(modelItem => item.EncadrementRequis)</td><td>@Html.DisplayFor(modelItem => item.Duree)</td><td>@Html.DisplayFor(modelItem => item.Objectifs)</td><td>@Html.DisplayFor(modelItem => item.CandidatID)</td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.StageID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.StageID }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.StageID })
+        </td>
+    </tr>
+}
+</table>

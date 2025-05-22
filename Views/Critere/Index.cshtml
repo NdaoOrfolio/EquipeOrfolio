@@ -1,0 +1,29 @@
+
+@model IEnumerable<EquipeOrfolio.Models.Critere>
+
+@{
+    ViewBag.Title = "Liste des critères";
+}
+
+<h2>Liste des critères</h2>
+
+<p>
+    @Html.ActionLink("Créer un nouveau critère", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>Description</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.CritereID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.CritereID })
+        </td>
+    </tr>
+}
+</table>

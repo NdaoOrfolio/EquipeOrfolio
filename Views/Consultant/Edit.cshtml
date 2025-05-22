@@ -1,0 +1,47 @@
+@model EquipeOrfolio.Models.Consultant
+
+@{
+    ViewBag.Title = "Modifier Consultant";
+}
+
+<h2>Modifier Consultant</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.TarifHoraire, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TarifHoraire, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TarifHoraire, "", new { @class = "text-danger" })
+            </div>
+        </div>
+<div class="form-group">
+            @Html.LabelFor(model => model.TypeContrat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TypeContrat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TypeContrat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+<div class="form-group">
+            @Html.LabelFor(model => model.DureeMandat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DureeMandat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DureeMandat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+<div class="form-group">
+            @Html.LabelFor(model => model.CandidatID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CandidatID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CandidatID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Modifier" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+@Html.HiddenFor(model => model.ConsultantID)

@@ -1,0 +1,29 @@
+@model IEnumerable<EquipeOrfolio.Models.Consultant>
+
+@{
+    ViewBag.Title = "Liste des consultants";
+}
+
+<h2>Liste des consultants</h2>
+
+<p>
+    @Html.ActionLink("Créer un nouveau", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>TarifHoraire</th><th>TypeContrat</th><th>DureeMandat</th><th>CandidatID</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.TarifHoraire)</td><td>@Html.DisplayFor(modelItem => item.TypeContrat)</td><td>@Html.DisplayFor(modelItem => item.DureeMandat)</td><td>@Html.DisplayFor(modelItem => item.CandidatID)</td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.ConsultantID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.ConsultantID }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.ConsultantID })
+        </td>
+    </tr>
+}
+</table>

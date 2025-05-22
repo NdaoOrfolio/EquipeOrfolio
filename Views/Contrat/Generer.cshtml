@@ -1,0 +1,25 @@
+
+@model EquipeOrfolio.Models.Candidat
+
+@{
+    ViewBag.Title = "Contrat généré";
+    var typeContrat = ViewBag.TypeContrat as string;
+}
+
+<h2>@typeContrat</h2>
+
+<div class="contract-preview">
+    <p>Nom : <strong>@Model.Prenom @Model.Nom</strong></p>
+    <p>Poste : <strong>@Model.TypePoste</strong></p>
+    <p>Établissement : <strong>@Model.Etablissement</strong></p>
+    <p>Programme d’études : <strong>@Model.ProgrammeEtudes</strong></p>
+    <p>Date de début : <strong>@Model.DateDebut?.ToString("dd/MM/yyyy")</strong></p>
+    <p>Disponibilité : <strong>@Model.Disponibilite</strong></p>
+    <p>Remarques : <strong>@Model.Remarques</strong></p>
+</div>
+
+<hr />
+
+<p>
+    Ce document constitue un aperçu non officiel. Le contrat final vous sera transmis par courriel.
+</p>

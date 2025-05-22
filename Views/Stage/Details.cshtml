@@ -1,0 +1,17 @@
+@model EquipeOrfolio.Models.Stage
+
+@{
+    ViewBag.Title = "Détails Stage";
+}
+
+<h2>Détails Stage</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>ProgrammeScolaire</dt><dd>@Html.DisplayFor(model => model.ProgrammeScolaire)</dd><dt>EncadrementRequis</dt><dd>@Html.DisplayFor(model => model.EncadrementRequis)</dd><dt>Duree</dt><dd>@Html.DisplayFor(model => model.Duree)</dd><dt>Objectifs</dt><dd>@Html.DisplayFor(model => model.Objectifs)</dd><dt>CandidatID</dt><dd>@Html.DisplayFor(model => model.CandidatID)</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.StageID }) |
+    @Html.ActionLink("Retour à la liste", "Index")
+</p>
