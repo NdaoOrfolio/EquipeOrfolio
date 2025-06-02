@@ -1,33 +1,48 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    ViewBag.Title = "Accueil";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<div class="text-center mt-5 mb-4">
+    <h1 class="display-4 fw-bold text-primary">Bienvenue sur <span class="text-dark">OrfolioÉquipe</span></h1>
+    <p class="lead mt-3">
+        Une plateforme intelligente de gestion de candidatures, développée pour <strong>Studio Orfolio</strong>.
+    </p>
+</div>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+<div class="row text-center gy-4 mb-5">
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">👤 Gestion des Candidats</h5>
+                <p class="card-text">Ajoutez, consultez et suivez les profils de stagiaires, consultants ou employés.</p>
+                <a href="/Candidat" class="btn btn-primary">Voir les candidats</a>
+            </div>
+        </div>
     </div>
-</main>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="card-title text-success">📝 Suivi des Stages & Mandats</h5>
+                <p class="card-text">Gérez les stages et missions de consultation avec durée, type de contrat et suivi personnalisé.</p>
+                <a href="/Stage" class="btn btn-success me-2">Stages</a>
+                <a href="/Consultant" class="btn btn-outline-success">Consultants</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="card-title text-warning">📨 Contrats & Notifications</h5>
+                <p class="card-text">Générez et envoyez automatiquement les contrats avec un système d'email intégré.</p>
+                <a href="/Contrat/Generer/1" class="btn btn-warning text-white">Générer un contrat</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="mb-4" />
+
+<div class="text-center text-muted small">
+    <p>&copy; @DateTime.Now.Year - OrfolioÉquipe | Développé avec ❤️ pour Studio Orfolio</p>
+</div>

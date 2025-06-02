@@ -133,11 +133,32 @@
     <Compile Include="Controllers\ConsultantController.cs" />
     <Compile Include="Controllers\ContratController.cs" />
     <Compile Include="Controllers\CritereController.cs" />
+    <Compile Include="Controllers\GestionHeuresController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\OrfolioController.cs" />
     <Compile Include="Controllers\StageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>OrfolioBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>OrfolioBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Candidat.cs">
+      <DependentUpon>OrfolioBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Consultant.cs">
+      <DependentUpon>OrfolioBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Critere.cs">
+      <DependentUpon>OrfolioBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HeureCollaborateurViewModel.cs" />
+    <Compile Include="Models\HeuresTravaillees.cs">
+      <DependentUpon>OrfolioBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrfolioBase.Context.cs">
       <AutoGen>True</AutoGen>
@@ -153,6 +174,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OrfolioBase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Stage.cs">
+      <DependentUpon>OrfolioBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Utilisateur.cs">
+      <DependentUpon>OrfolioBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -173,6 +200,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\orfolio-style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -224,7 +252,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\index.cshtml" />
     <Content Include="Views\Critere\Create.cshtml" />
     <Content Include="Views\Critere\Delete.cshtml" />
     <Content Include="Views\Critere\Edit.cshtml" />
@@ -245,6 +272,8 @@
     <Content Include="Views\Consultant\Index.cshtml" />
     <Content Include="Views\Authentification\Login.cshtml" />
     <Content Include="Views\Contrat\Generer.cshtml" />
+    <Content Include="Views\Index.cshtml" />
+    <Content Include="Views\GestionHeures\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

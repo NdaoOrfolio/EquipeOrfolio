@@ -4,7 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f14019b953ab44a28a3568cbd7d0d283" Name="Diagram1" />
+      <Diagram DiagramId="f14019b953ab44a28a3568cbd7d0d283" Name="Diagram1" ZoomLevel="86" >
+        <EntityTypeShape EntityType="OrfolioBaseModel.Candidat" Width="1.5" PointX="0.75" PointY="2" />
+        <EntityTypeShape EntityType="OrfolioBaseModel.Consultant" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="OrfolioBaseModel.Critere" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OrfolioBaseModel.Stage" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="OrfolioBaseModel.Utilisateur" Width="1.5" PointX="5.75" PointY="3.75" />
+        <AssociationConnector Association="OrfolioBaseModel.FK__Consultan__Candi__3F466844" />
+        <AssociationConnector Association="OrfolioBaseModel.FK__Stage__CandidatI__3C69FB99" />
+        <EntityTypeShape EntityType="OrfolioBaseModel.AspNetRoles" Width="1.5" PointX="5.375" PointY="8.25" />
+        <EntityTypeShape EntityType="OrfolioBaseModel.AspNetUsers" Width="1.5" PointX="7.625" PointY="7" />
+        <EntityTypeShape EntityType="OrfolioBaseModel.HeuresTravaillees" Width="1.5" PointX="9.875" PointY="8.125" />
+        <AssociationConnector Association="OrfolioBaseModel.FK_HeuresTravaillees_AspNetUsers" />
+        <AssociationConnector Association="OrfolioBaseModel.AspNetUserRoles" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

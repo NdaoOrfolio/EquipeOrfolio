@@ -4,20 +4,472 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OrfolioBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="OrfolioBaseModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="OrfolioBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="NomComplet" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Candidat">
+          <Key>
+            <PropertyRef Name="CandidatID" />
+          </Key>
+          <Property Name="CandidatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Courriel" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypePoste" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProgrammeEtudes" Type="nvarchar" MaxLength="255" />
+          <Property Name="Etablissement" Type="nvarchar" MaxLength="255" />
+          <Property Name="Disponibilite" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateDebut" Type="date" />
+          <Property Name="Remarques" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Consultant">
+          <Key>
+            <PropertyRef Name="ConsultantID" />
+          </Key>
+          <Property Name="ConsultantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidatID" Type="int" />
+          <Property Name="TarifHoraire" Type="money" />
+          <Property Name="TypeContrat" Type="nvarchar" MaxLength="50" />
+          <Property Name="DureeMandat" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Critere">
+          <Key>
+            <PropertyRef Name="CritereID" />
+          </Key>
+          <Property Name="CritereID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HeuresTravaillees">
+          <Key>
+            <PropertyRef Name="HeureID" />
+          </Key>
+          <Property Name="HeureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DateTravail" Type="date" Nullable="false" />
+          <Property Name="NombreHeures" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="StageID" />
+          </Key>
+          <Property Name="StageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidatID" Type="int" />
+          <Property Name="ProgrammeScolaire" Type="nvarchar" MaxLength="255" />
+          <Property Name="EncadrementRequis" Type="bit" />
+          <Property Name="Duree" Type="nvarchar" MaxLength="50" />
+          <Property Name="Objectifs" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="UtilisateurID" />
+          </Key>
+          <Property Name="UtilisateurID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomUtilisateur" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MotDePasse" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Consultan__Candi__3F466844">
+          <End Role="Candidat" Type="Self.Candidat" Multiplicity="0..1" />
+          <End Role="Consultant" Type="Self.Consultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidat">
+              <PropertyRef Name="CandidatID" />
+            </Principal>
+            <Dependent Role="Consultant">
+              <PropertyRef Name="CandidatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stage__CandidatI__3C69FB99">
+          <End Role="Candidat" Type="Self.Candidat" Multiplicity="0..1" />
+          <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidat">
+              <PropertyRef Name="CandidatID" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="CandidatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserRoles_Roles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserRoles_Users">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HeuresTravaillees_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="HeuresTravaillees" Type="Self.HeuresTravaillees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HeuresTravaillees">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OrfolioBaseModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Candidat" EntityType="Self.Candidat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consultant" EntityType="Self.Consultant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Critere" EntityType="Self.Critere" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HeuresTravaillees" EntityType="Self.HeuresTravaillees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stage" EntityType="Self.Stage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Consultan__Candi__3F466844" Association="Self.FK__Consultan__Candi__3F466844">
+            <End Role="Candidat" EntitySet="Candidat" />
+            <End Role="Consultant" EntitySet="Consultant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stage__CandidatI__3C69FB99" Association="Self.FK__Stage__CandidatI__3C69FB99">
+            <End Role="Candidat" EntitySet="Candidat" />
+            <End Role="Stage" EntitySet="Stage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserRoles_Roles" Association="Self.FK_AspNetUserRoles_Roles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserRoles_Users" Association="Self.FK_AspNetUserRoles_Users">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HeuresTravaillees_AspNetUsers" Association="Self.FK_HeuresTravaillees_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="HeuresTravaillees" EntitySet="HeuresTravaillees" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OrfolioBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="OrfolioBaseEntities" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="OrfolioBaseEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Candidat" EntityType="OrfolioBaseModel.Candidat" />
+          <EntitySet Name="Consultant" EntityType="OrfolioBaseModel.Consultant" />
+          <EntitySet Name="Critere" EntityType="OrfolioBaseModel.Critere" />
+          <EntitySet Name="Stage" EntityType="OrfolioBaseModel.Stage" />
+          <EntitySet Name="Utilisateur" EntityType="OrfolioBaseModel.Utilisateur" />
+          <AssociationSet Name="FK__Consultan__Candi__3F466844" Association="OrfolioBaseModel.FK__Consultan__Candi__3F466844">
+            <End Role="Candidat" EntitySet="Candidat" />
+            <End Role="Consultant" EntitySet="Consultant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stage__CandidatI__3C69FB99" Association="OrfolioBaseModel.FK__Stage__CandidatI__3C69FB99">
+            <End Role="Candidat" EntitySet="Candidat" />
+            <End Role="Stage" EntitySet="Stage" />
+          </AssociationSet>
+          <EntitySet Name="AspNetRoles" EntityType="OrfolioBaseModel.AspNetRoles" />
+          <EntitySet Name="AspNetUsers" EntityType="OrfolioBaseModel.AspNetUsers" />
+          <EntitySet Name="HeuresTravaillees" EntityType="OrfolioBaseModel.HeuresTravaillees" />
+          <AssociationSet Name="FK_HeuresTravaillees_AspNetUsers" Association="OrfolioBaseModel.FK_HeuresTravaillees_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="HeuresTravaillees" EntitySet="HeuresTravaillees" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="OrfolioBaseModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Candidat">
+          <Key>
+            <PropertyRef Name="CandidatID" />
+          </Key>
+          <Property Name="CandidatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prenom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Courriel" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypePoste" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProgrammeEtudes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Etablissement" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Disponibilite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateDebut" Type="DateTime" Precision="0" />
+          <Property Name="Remarques" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Consultant" Relationship="OrfolioBaseModel.FK__Consultan__Candi__3F466844" FromRole="Candidat" ToRole="Consultant" />
+          <NavigationProperty Name="Stage" Relationship="OrfolioBaseModel.FK__Stage__CandidatI__3C69FB99" FromRole="Candidat" ToRole="Stage" />
+        </EntityType>
+        <EntityType Name="Consultant">
+          <Key>
+            <PropertyRef Name="ConsultantID" />
+          </Key>
+          <Property Name="ConsultantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidatID" Type="Int32" />
+          <Property Name="TarifHoraire" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TypeContrat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DureeMandat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Candidat" Relationship="OrfolioBaseModel.FK__Consultan__Candi__3F466844" FromRole="Consultant" ToRole="Candidat" />
+        </EntityType>
+        <EntityType Name="Critere">
+          <Key>
+            <PropertyRef Name="CritereID" />
+          </Key>
+          <Property Name="CritereID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Stage">
+          <Key>
+            <PropertyRef Name="StageID" />
+          </Key>
+          <Property Name="StageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidatID" Type="Int32" />
+          <Property Name="ProgrammeScolaire" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EncadrementRequis" Type="Boolean" />
+          <Property Name="Duree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Objectifs" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Candidat" Relationship="OrfolioBaseModel.FK__Stage__CandidatI__3C69FB99" FromRole="Stage" ToRole="Candidat" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="UtilisateurID" />
+          </Key>
+          <Property Name="UtilisateurID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomUtilisateur" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MotDePasse" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Consultan__Candi__3F466844">
+          <End Type="OrfolioBaseModel.Candidat" Role="Candidat" Multiplicity="0..1" />
+          <End Type="OrfolioBaseModel.Consultant" Role="Consultant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidat">
+              <PropertyRef Name="CandidatID" />
+            </Principal>
+            <Dependent Role="Consultant">
+              <PropertyRef Name="CandidatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stage__CandidatI__3C69FB99">
+          <End Type="OrfolioBaseModel.Candidat" Role="Candidat" Multiplicity="0..1" />
+          <End Type="OrfolioBaseModel.Stage" Role="Stage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidat">
+              <PropertyRef Name="CandidatID" />
+            </Principal>
+            <Dependent Role="Stage">
+              <PropertyRef Name="CandidatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="OrfolioBaseModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NomComplet" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HeuresTravaillees" Relationship="OrfolioBaseModel.FK_HeuresTravaillees_AspNetUsers" FromRole="AspNetUsers" ToRole="HeuresTravaillees" />
+          <NavigationProperty Name="AspNetRoles" Relationship="OrfolioBaseModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="HeuresTravaillees">
+          <Key>
+            <PropertyRef Name="HeureID" />
+          </Key>
+          <Property Name="HeureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DateTravail" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NombreHeures" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="AspNetUsers" Relationship="OrfolioBaseModel.FK_HeuresTravaillees_AspNetUsers" FromRole="HeuresTravaillees" ToRole="AspNetUsers" />
+        </EntityType>
+        <Association Name="FK_HeuresTravaillees_AspNetUsers">
+          <End Type="OrfolioBaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="OrfolioBaseModel.HeuresTravaillees" Role="HeuresTravaillees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HeuresTravaillees">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="OrfolioBaseModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="OrfolioBaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OrfolioBaseModelStoreContainer" CdmEntityContainer="OrfolioBaseEntities" />
+        <EntityContainerMapping StorageEntityContainer="OrfolioBaseModelStoreContainer" CdmEntityContainer="OrfolioBaseEntities" >
+          <EntitySetMapping Name="Candidat">
+            <EntityTypeMapping TypeName="OrfolioBaseModel.Candidat">
+              <MappingFragment StoreEntitySet="Candidat">
+                <ScalarProperty Name="Remarques" ColumnName="Remarques" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="Disponibilite" ColumnName="Disponibilite" />
+                <ScalarProperty Name="Etablissement" ColumnName="Etablissement" />
+                <ScalarProperty Name="ProgrammeEtudes" ColumnName="ProgrammeEtudes" />
+                <ScalarProperty Name="TypePoste" ColumnName="TypePoste" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Courriel" ColumnName="Courriel" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="CandidatID" ColumnName="CandidatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consultant">
+            <EntityTypeMapping TypeName="OrfolioBaseModel.Consultant">
+              <MappingFragment StoreEntitySet="Consultant">
+                <ScalarProperty Name="DureeMandat" ColumnName="DureeMandat" />
+                <ScalarProperty Name="TypeContrat" ColumnName="TypeContrat" />
+                <ScalarProperty Name="TarifHoraire" ColumnName="TarifHoraire" />
+                <ScalarProperty Name="CandidatID" ColumnName="CandidatID" />
+                <ScalarProperty Name="ConsultantID" ColumnName="ConsultantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Critere">
+            <EntityTypeMapping TypeName="OrfolioBaseModel.Critere">
+              <MappingFragment StoreEntitySet="Critere">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CritereID" ColumnName="CritereID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stage">
+            <EntityTypeMapping TypeName="OrfolioBaseModel.Stage">
+              <MappingFragment StoreEntitySet="Stage">
+                <ScalarProperty Name="Objectifs" ColumnName="Objectifs" />
+                <ScalarProperty Name="Duree" ColumnName="Duree" />
+                <ScalarProperty Name="EncadrementRequis" ColumnName="EncadrementRequis" />
+                <ScalarProperty Name="ProgrammeScolaire" ColumnName="ProgrammeScolaire" />
+                <ScalarProperty Name="CandidatID" ColumnName="CandidatID" />
+                <ScalarProperty Name="StageID" ColumnName="StageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilisateur">
+            <EntityTypeMapping TypeName="OrfolioBaseModel.Utilisateur">
+              <MappingFragment StoreEntitySet="Utilisateur">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+                <ScalarProperty Name="NomUtilisateur" ColumnName="NomUtilisateur" />
+                <ScalarProperty Name="UtilisateurID" ColumnName="UtilisateurID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="OrfolioBaseModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="OrfolioBaseModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="NomComplet" ColumnName="NomComplet" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HeuresTravaillees">
+            <EntityTypeMapping TypeName="OrfolioBaseModel.HeuresTravaillees">
+              <MappingFragment StoreEntitySet="HeuresTravaillees">
+                <ScalarProperty Name="NombreHeures" ColumnName="NombreHeures" />
+                <ScalarProperty Name="DateTravail" ColumnName="DateTravail" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="HeureID" ColumnName="HeureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="OrfolioBaseModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

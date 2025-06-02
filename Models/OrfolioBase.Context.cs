@@ -25,5 +25,13 @@ namespace EquipeOrfolio.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Candidat> Candidat { get; set; }
+        public virtual DbSet<Consultant> Consultant { get; set; }
+        public virtual DbSet<Critere> Critere { get; set; }
+        public virtual DbSet<Stage> Stage { get; set; }
+        public virtual DbSet<Utilisateur> Utilisateur { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<HeuresTravaillees> HeuresTravaillees { get; set; }
     }
 }

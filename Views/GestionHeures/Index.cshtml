@@ -1,0 +1,28 @@
+
+@model IEnumerable<OrfolioBase.Models.HeureCollaborateurViewModel>
+
+@{
+    ViewBag.Title = "Heures des collaborateurs";
+}
+
+<h2 class="mt-4">Tableau de gestion des heures - 3 derniers mois</h2>
+
+<table class="table table-striped table-bordered mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Nom complet</th>
+            <th>Email</th>
+            <th>Heures cumulées</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.NomComplet</td>
+            <td>@item.Email</td>
+            <td>@item.HeuresCumulées</td>
+        </tr>
+    }
+    </tbody>
+</table>
